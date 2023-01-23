@@ -1,7 +1,7 @@
 import sharp from "sharp";
 import fs from "node:fs";
 
-export function converter (pathSVG= "./svg/", pathImg= "./img/"){
+export function converter (resize=(500, 500), pathSVG= "./svg/", pathImg= "./img/"){
 const files = fs.readdirSync(pathSVG);
 
 console.log(files);
@@ -13,6 +13,7 @@ files.map((file) => {
 
   sharp(pathSVG + file)
     .png()
+    .resize(resize)
     .toFile(pathImg + name)
     .then(function (info) {
       console.log(info);
@@ -21,3 +22,4 @@ files.map((file) => {
       console.log(err);
     });
 });}
+
